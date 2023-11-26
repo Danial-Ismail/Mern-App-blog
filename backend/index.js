@@ -12,14 +12,6 @@ const postRoute=require('./routes/posts')
 const commentRoute=require('./routes/comments')
 
 
-const connectDB=async()=>{
-    try {
-        await mongoose.connect(process.env.MONGO_URL)
-        console.log("database is connected successfully!")
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 dotenv.config()
 app.use(express.json())
@@ -33,6 +25,14 @@ app.use("/api/comments",commentRoute)
 
 
 
+const connectDB=async()=>{
+    try {
+        await mongoose.connect(process.env.MONGO_URL)
+        console.log("database is connected successfully!")
+    } catch (error) {
+        console.log(error)
+    }
+}
 const storage=multer.diskStorage({
     destination:(req,file,fn)=>{
         fn(null,"images")
